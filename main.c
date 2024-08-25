@@ -12,10 +12,10 @@ struct Product {
     unsigned int price;
 };
 
-struct Product mie_goreng = { "Mie Goreng", 3000 };
-struct Product coca_cola = { "Coca Cola", 5000 };
+const struct Product mie_goreng = { "Mie Goreng", 3000 };
+const struct Product coca_cola = { "Coca Cola", 5000 };
 
-struct Product *items[] = { &mie_goreng, &coca_cola };
+const struct Product *items[] = { &mie_goreng, &coca_cola };
 
 const char input_values[] = { 'i', 'a', 'w', 's', 't', 'q' };
 enum input { 
@@ -34,7 +34,7 @@ int is_enum(char var) {
     return 0;
 }
 
-void show_menu(struct Product **products, size_t len) {
+void show_menu(const struct Product **products, size_t len) {
     size_t i;
     
     for (i = 0; i < len; i++)
