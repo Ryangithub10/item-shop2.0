@@ -1,10 +1,12 @@
 #include <stdio.h>
 
+// TODO: Tambahin member inventory
 typedef struct Character {
     char* name;
     int money;
 } Character;
 
+const char input_values[] = { 'i', 'a', 'w', 's', 't', 'q' };
 enum input { 
     ITEM      = 'i', 
     ACCESSORY = 'a', 
@@ -13,7 +15,6 @@ enum input {
     TALK      = 't',
     QUIT      = 'q',
 };
-const char input_values[] = { 'i', 'a', 'w', 's', 't', 'q' };
 
 int is_enum(char var) {
     for (int i = 0; i < (sizeof(input_values) / sizeof(input_values[0])); i++)
