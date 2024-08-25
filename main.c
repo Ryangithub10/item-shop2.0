@@ -4,7 +4,18 @@
 typedef struct Character {
     char* name;
     int money;
+    char** inventory;
 } Character;
+
+struct Product {
+    char* name;
+    unsigned int price;
+};
+
+struct Product mie_goreng = { "Mie Goreng", 3000 };
+struct Product coca_cola = { "Coca Cola", 5000 };
+
+struct Product *items[] = { &mie_goreng, &coca_cola };
 
 const char input_values[] = { 'i', 'a', 'w', 's', 't', 'q' };
 enum input { 
@@ -21,6 +32,15 @@ int is_enum(char var) {
         if (input_values[i] == var) { return 1; }
 
     return 0;
+}
+
+void show_menu(struct Product **products, size_t len) {
+    size_t i;
+    
+    for (i = 0; i < len; i++)
+        printf("%ld. %s\t RP. %d\n", i + 1, products[i]->name, products[i]->price);
+
+    printf("%ld. Back\n", ++i);
 }
 
 int main() {
@@ -49,9 +69,15 @@ int main() {
 
         switch(user_input) {
             case ITEM: 
-                puts("This is Item section");
-                getchar();
-                getchar();
+                while (1) {
+                    puts("What do you want?\n");
+
+                    show_menu(items, 2);
+
+                    getchar();
+                    getchar();
+                    break;
+                }
                 break;
             case ACCESSORY:
                 puts("This is Accessory section");
