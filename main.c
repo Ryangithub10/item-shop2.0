@@ -1,41 +1,24 @@
 #include <stdio.h>
+#include "struct_enum.h"
 
-typedef struct Character {
-    char* name;
-    int money;
-} Character;
+// Decleration
+Character ryan = { "Ryan", 1000000 };
+const Product mie_goreng = { ITEM_T, "Mie Goreng", 3000 };
+const Product coca_cola = { ITEM_T, "Coca Cola", 5000 };
+const Product *items[] = { &mie_goreng, &coca_cola };
 
-// TODO: Bikin union Props untuk Product sebagai stats suatu item
-struct Product {
-    char* name;
-    unsigned int price;
-};
-
-const char input_values[] = { 'i', 'a', 'w', 's', 't', 'q' };
-enum input { 
-    ITEM      = 'i', 
-    ACCESSORY = 'a', 
-    WEAPON    = 'w', 
-    SELL      = 's', 
-    TALK      = 't',
-    QUIT      = 'q',
-};
-
-int is_enum(char var);
-void show_menu(const struct Product **products, size_t len);
+// Function Definition
+int is_enum(char var, int len);
+void show_list(const struct Product **products, size_t len);
 
 int main() {
-    Character ryan = { "Ryan", 1000000 };
     char user_input;
-    const struct Product mie_goreng = { "Mie Goreng", 3000 };
-    const struct Product coca_cola = { "Coca Cola", 5000 };
-    const struct Product *items[] = { &mie_goreng, &coca_cola };
 
     while (1) {
         do {
             if (!user_input)
                 printf("WELCOME TO MY CONVINIENT STORE %s!\n\n", ryan.name);
-            else if (!is_enum(user_input)) {
+            else if (!is_enum(user_input, LEN_INPUT)) {
                 puts("\nPlease insert a valid input\n");
                 getchar();
             }
@@ -49,14 +32,14 @@ int main() {
 
             printf("=> ");
             scanf("%c", &user_input);
-        } while (!is_enum(user_input));
+        } while (!is_enum(user_input, LEN_INPUT));
 
         switch(user_input) {
             case ITEM: 
                 while (1) {
                     puts("What do you want?\n");
 
-                    show_menu(items, 2);
+                    show_list(items, 2);
 
                     getchar();
                     getchar();
@@ -94,15 +77,15 @@ int main() {
     return 0;
 }
 
-int is_enum(char var) {
-    for (int i = 0; i < (sizeof(input_values) / sizeof(input_values[0])); i++)
+int is_enum(char var, int len) {
+    for (int i = 0; i < len; i++)
         if (input_values[i] == var) 
             return 1;
 
     return 0;
 }
 
-void show_menu(const struct Product **products, size_t len) {
+void show_list(const struct Product **products, size_t len) {
     size_t i;
     
     for (i = 0; i < len; i++)
@@ -110,3 +93,4 @@ void show_menu(const struct Product **products, size_t len) {
 
     printf("%ld. Back\n", ++i);
 }
+
