@@ -1,21 +1,15 @@
 #include <stdio.h>
 
-// TODO: Tambahin member inventory
 typedef struct Character {
     char* name;
     int money;
-    char** inventory;
 } Character;
 
+// TODO: Bikin union Props untuk Product sebagai suatu item
 struct Product {
     char* name;
     unsigned int price;
 };
-
-const struct Product mie_goreng = { "Mie Goreng", 3000 };
-const struct Product coca_cola = { "Coca Cola", 5000 };
-
-const struct Product *items[] = { &mie_goreng, &coca_cola };
 
 const char input_values[] = { 'i', 'a', 'w', 's', 't', 'q' };
 enum input { 
@@ -27,25 +21,15 @@ enum input {
     QUIT      = 'q',
 };
 
-int is_enum(char var) {
-    for (int i = 0; i < (sizeof(input_values) / sizeof(input_values[0])); i++)
-        if (input_values[i] == var) { return 1; }
-
-    return 0;
-}
-
-void show_menu(const struct Product **products, size_t len) {
-    size_t i;
-    
-    for (i = 0; i < len; i++)
-        printf("%ld. %s\t RP. %d\n", i + 1, products[i]->name, products[i]->price);
-
-    printf("%ld. Back\n", ++i);
-}
+int is_enum(char var);
+void show_menu(const struct Product **products, size_t len);
 
 int main() {
     Character ryan = { "Ryan", 1000000 };
     char user_input;
+    const struct Product mie_goreng = { "Mie Goreng", 3000 };
+    const struct Product coca_cola = { "Coca Cola", 5000 };
+    const struct Product *items[] = { &mie_goreng, &coca_cola };
 
     while (1) {
         do {
@@ -108,4 +92,20 @@ int main() {
     }
 
     return 0;
+}
+
+int is_enum(char var) {
+    for (int i = 0; i < (sizeof(input_values) / sizeof(input_values[0])); i++)
+        if (input_values[i] == var) { return 1; }
+
+    return 0;
+}
+
+void show_menu(const struct Product **products, size_t len) {
+    size_t i;
+    
+    for (i = 0; i < len; i++)
+        printf("%ld. %s\t RP. %d\n", i + 1, products[i]->name, products[i]->price);
+
+    printf("%ld. Back\n", ++i);
 }
