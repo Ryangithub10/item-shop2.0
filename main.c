@@ -5,7 +5,7 @@ typedef struct Character {
     int money;
 } Character;
 
-// TODO: Bikin union Props untuk Product sebagai suatu item
+// TODO: Bikin union Props untuk Product sebagai stats suatu item
 struct Product {
     char* name;
     unsigned int price;
@@ -96,7 +96,8 @@ int main() {
 
 int is_enum(char var) {
     for (int i = 0; i < (sizeof(input_values) / sizeof(input_values[0])); i++)
-        if (input_values[i] == var) { return 1; }
+        if (input_values[i] == var) 
+            return 1;
 
     return 0;
 }
