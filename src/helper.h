@@ -1,6 +1,6 @@
 #ifndef HELPER_H
 #define HELPER_H
 
-int is_enum(char var);
+int is_enum(char var, char enums[]);
 
 #endif

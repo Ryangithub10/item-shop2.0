@@ -1,10 +1,6 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#define LEN_INPUT 6
-
-const char input_values[LEN_INPUT] = { 'i', 'a', 'w', 's', 't', 'q' };
-
 enum input { 
     ITEM      = 'i', 
     ACCESSORY = 'a', 
@@ -13,5 +9,6 @@ enum input {
     TALK      = 't',
     QUIT      = 'q',
 };
+char input_values[] = { ITEM, ACCESSORY, WEAPON, SELL, TALK, QUIT };
 
 #endif

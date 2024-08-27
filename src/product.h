@@ -11,7 +11,8 @@ typedef struct Product {
     union {
         unsigned int hp, sp, atk, def;
     };
-    // char *desc;
+    unsigned int id;
+    char *desc;
 } Product;
 
 #endif
