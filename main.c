@@ -5,7 +5,7 @@
 #include "lib/helper.h"
 
 // Decleration
-Character ryan = { "Ryan", 1000000 };
+Character ryan = { "Ryan", 100000 };
 char enum_inputs[] = { ITEM, ACCESSORY, WEAPON, SELL, TALK, QUIT };
 
 // Product items
@@ -13,27 +13,24 @@ Product mie_goreng = {
     .type = ITEM_T, 
     .name = "Mie Goreng", 
     .price = 3000,
+    .hp = 50,
 };
 
 Product coca_cola = { 
     .type = ITEM_T, 
     .name = "Coca Cola", 
     .price = 5000, 
+    .hp = 30
 };
 
-Product pheonix_down = { 
-    .type = ITEM_T, 
-    .name = "Pheonix Down", 
-    .price = 50000,
-};
-
-Product *items[] = { &mie_goreng, &coca_cola, &pheonix_down };
+Product *items[] = { &mie_goreng, &coca_cola };
 const int items_len = sizeof(items) / sizeof(items[0]);
 // Product items end
 
+// TODO: Bikin Fungsi talk
 // Function Definition
 void print_product(Product **products, size_t len);
-void show_menu(Product **products);
+void show_menu(Product **products, size_t len);
 void show_desc(Product *product);
 
 int main() {
@@ -63,7 +60,7 @@ int main() {
 
         switch(user_input) {
             case ITEM: 
-                show_menu(items);
+                show_menu(items, items_len);
                 break;
             case ACCESSORY:
                 puts("This is Accessory section");
@@ -113,13 +110,13 @@ void show_desc(Product *product) {
         // TODO: Make case statement for WEAPON_T and ACCESSORY_T
         case ITEM_T:
             printf("Name: %s\n", product->name);
-            printf("Health: %d\n", product->hp);
+            printf("Health: +%d\n", product->hp);
             printf("Price: %d\n", product->price);
             break;
     }
 }
 
-void show_menu(Product **products) {
+void show_menu(Product **products, size_t products_len) {
     int input;
     int con;
     int i;
@@ -127,7 +124,7 @@ void show_menu(Product **products) {
     while (1) { 
         puts("What do you want?\n");
 
-        print_product(products, items_len);
+        print_product(products, products_len);
 
         printf("=> ");
         scanf("%d", &input);
