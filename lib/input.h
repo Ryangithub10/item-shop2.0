@@ -9,6 +9,5 @@ enum input {
     TALK      = 't',
     QUIT      = 'q',
 };
-char input_values[] = { ITEM, ACCESSORY, WEAPON, SELL, TALK, QUIT };
 
 #endif

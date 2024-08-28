@@ -1,11 +1,12 @@
 #include <stdio.h>
-#include "src/input.h"
-#include "src/product.h"
-#include "src/character.h"
-#include "src/helper.h"
+#include "lib/input.h"
+#include "lib/product.h"
+#include "lib/character.h"
+#include "lib/helper.h"
 
 // Decleration
 Character ryan = { "Ryan", 1000000 };
+char enum_inputs[] = { ITEM, ACCESSORY, WEAPON, SELL, TALK, QUIT };
 const Product mie_goreng = { ITEM_T, "Mie Goreng", 3000 };
 const Product coca_cola = { ITEM_T, "Coca Cola", 5000 };
 const Product pheonix_down = { ITEM_T, "Pheonix Down", 50000 };
@@ -24,10 +25,10 @@ int main() {
         do {
             if (!user_input)
                 printf("WELCOME TO MY CONVINIENT STORE %s!\n\n", ryan.name);
-            else if (!is_enum(user_input, input_values)) {
+            else if (!is_char_enum(user_input, enum_inputs)) {
                 puts("\nPlease insert a valid input\n");
                 getchar();
-            }
+            } 
 
             puts("1. (I)tem");
             puts("2. (A)ccessory");
@@ -38,7 +39,7 @@ int main() {
 
             printf("=> ");
             scanf("%c", &user_input);
-        } while (!is_enum(user_input, input_values));
+        } while (!is_char_enum(user_input, enum_inputs));
 
         switch(user_input) {
             case ITEM: 
