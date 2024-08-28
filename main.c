@@ -43,6 +43,7 @@ int main() {
         do {
             if (!user_input)
                 printf("WELCOME TO MY CONVINIENT STORE %s!\n\n", ryan.name);
+            // TODO: Don't print this when user back
             else if (!is_char_enum(user_input, enum_inputs)) {
                 puts("\nPlease insert a valid input\n");
                 getchar();
@@ -86,7 +87,7 @@ int main() {
         } 
 
         if (user_input == QUIT) {
-            puts("\nHave a nice time my boy!");
+            puts("\nSee you later...");
             break;
         }
     }
@@ -106,7 +107,9 @@ void print_product(Product **products, size_t len) {
 }
 
 void show_desc(Product *product) {
+    printf("\n");
     switch (product->type) {
+        // TODO: Make case statement for WEAPON_T and ACCESSORY_T
         case ITEM_T:
             printf("Name: %s\n", product->name);
             printf("Health: %d\n", product->hp);
@@ -120,7 +123,7 @@ void show_menu(Product **products) {
     int con;
     int i;
 
-    while (1) {
+    while (1) { 
         puts("What do you want?\n");
 
         print_product(products, items_len);
@@ -139,7 +142,7 @@ void show_menu(Product **products) {
             }
         }
 
-        puts("\nWould you buy it?");
+        puts("\nWould you buy it?\n");
         puts("1. Yes\t 0. No");
         printf("=> ");
         scanf("%d", &con);
@@ -151,6 +154,6 @@ void show_menu(Product **products) {
                 puts("Hehehe, thank you!");
                 ryan.money -= products[i]->price;
             }
-        }  
+        }   
     }
 }
