@@ -7,16 +7,34 @@
 // Decleration
 Character ryan = { "Ryan", 1000000 };
 char enum_inputs[] = { ITEM, ACCESSORY, WEAPON, SELL, TALK, QUIT };
-const Product mie_goreng = { ITEM_T, "Mie Goreng", 3000 };
-const Product coca_cola = { ITEM_T, "Coca Cola", 5000 };
-const Product pheonix_down = { ITEM_T, "Pheonix Down", 50000 };
-const Product *items[] = { &mie_goreng, &coca_cola, &pheonix_down };
+
+// Product items
+Product mie_goreng = { 
+    .type = ITEM_T, 
+    .name = "Mie Goreng", 
+    .price = 3000,
+};
+
+Product coca_cola = { 
+    .type = ITEM_T, 
+    .name = "Coca Cola", 
+    .price = 5000, 
+};
+
+Product pheonix_down = { 
+    .type = ITEM_T, 
+    .name = "Pheonix Down", 
+    .price = 50000,
+};
+
+Product *items[] = { &mie_goreng, &coca_cola, &pheonix_down };
 const int items_len = sizeof(items) / sizeof(items[0]);
+// Product items end
 
 // Function Definition
-void print_product(const Product **products, size_t len);
-void show_menu(const Product **products);
-void show_desc(const Product **products);
+void print_product(Product **products, size_t len);
+void show_menu(Product **products);
+void show_desc(Product *product);
 
 int main() {
     char user_input;
@@ -76,23 +94,63 @@ int main() {
     return 0;
 }
 
-void print_product(const Product **products, size_t len) {
+void print_product(Product **products, size_t len) {
     size_t i;
     
-    for (i = 0; i < len; i++)
+    for (i = 0; i < len; i++) {
+        products[i]->id = i;
         printf("%ld. %s\t RP. %d\n", i + 1, products[i]->name, products[i]->price);
+    }
 
-    printf("%ld. Back\n", ++i);
+    printf("0. Back\n");
 }
 
-void show_menu(const Product **products) {
+void show_desc(Product *product) {
+    switch (product->type) {
+        case ITEM_T:
+            printf("Name: %s\n", product->name);
+            printf("Health: %d\n", product->hp);
+            printf("Price: %d\n", product->price);
+            break;
+    }
+}
+
+void show_menu(Product **products) {
+    int input;
+    int con;
+    int i;
+
     while (1) {
         puts("What do you want?\n");
 
         print_product(products, items_len);
 
-        getchar();
-        getchar();
-        break;
+        printf("=> ");
+        scanf("%d", &input);
+
+        if (input == 0) {
+            break;
+        }
+        
+        for (i = 0; i < items_len; i++) {
+            if (input - 1 == products[i]->id) {
+                show_desc(products[i]);
+                break;
+            }
+        }
+
+        puts("\nWould you buy it?");
+        puts("1. Yes\t 0. No");
+        printf("=> ");
+        scanf("%d", &con);
+
+        if (con == 1) {
+            if (ryan.money < products[i]->price)
+                puts("sorry, but you don't have enough money.");
+            else {
+                puts("Hehehe, thank you!");
+                ryan.money -= products[i]->price;
+            }
+        }  
     }
 }
