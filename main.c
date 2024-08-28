@@ -42,12 +42,13 @@ int main() {
     while (1) {
         do {
             if (!user_input)
-                printf("WELCOME TO MY CONVINIENT STORE %s!\n\n", ryan.name);
-            // TODO: Don't print this when user back
+                puts("WELCOME TO MY CONVINIENT STORE!");
             else if (!is_char_enum(user_input, enum_inputs)) {
-                puts("\nPlease insert a valid input\n");
+                puts("\n> Please insert a valid input");
                 getchar();
             } 
+
+            puts("What do you want?\n");
 
             puts("1. (I)tem");
             puts("2. (A)ccessory");
@@ -132,6 +133,7 @@ void show_menu(Product **products) {
         scanf("%d", &input);
 
         if (input == 0) {
+            getchar();
             break;
         }
         
