@@ -20,17 +20,16 @@ Product coca_cola = {
     .type = ITEM_T, 
     .name = "Coca Cola", 
     .price = 5000, 
-    .hp = 30
+    .hp = 30,
 };
 
 Product *items[] = { &mie_goreng, &coca_cola };
-const int items_len = sizeof(items) / sizeof(items[0]);
 // Product items end
 
-// TODO: Bikin Fungsi talk
+// TODO: Bikin Fungsi talk dan sell
 // Function Definition
-void print_product(Product **products, size_t len);
-void show_menu(Product **products, size_t len);
+void print_product(Product **products);
+void show_menu(Product **products);
 void show_desc(Product *product);
 
 int main() {
@@ -60,7 +59,7 @@ int main() {
 
         switch(user_input) {
             case ITEM: 
-                show_menu(items, items_len);
+                show_menu(items);
                 break;
             case ACCESSORY:
                 puts("This is Accessory section");
@@ -93,12 +92,13 @@ int main() {
     return 0;
 }
 
-void print_product(Product **products, size_t len) {
-    size_t i;
+void print_product(Product **products) {
+    size_t i = 0;
     
-    for (i = 0; i < len; i++) {
+    while (products[i] != NULL) {
         products[i]->id = i;
         printf("%ld. %s\t RP. %d\n", i + 1, products[i]->name, products[i]->price);
+        i++;
     }
 
     printf("0. Back\n");
@@ -116,15 +116,15 @@ void show_desc(Product *product) {
     }
 }
 
-void show_menu(Product **products, size_t products_len) {
+void show_menu(Product **products) {
     int input;
     int con;
-    int i;
+    int i = 0;
 
     while (1) { 
         puts("What do you want?\n");
 
-        print_product(products, products_len);
+        print_product(products);
 
         printf("=> ");
         scanf("%d", &input);
@@ -134,11 +134,12 @@ void show_menu(Product **products, size_t products_len) {
             break;
         }
         
-        for (i = 0; i < items_len; i++) {
+        while (products[i] != NULL) {
             if (input - 1 == products[i]->id) {
                 show_desc(products[i]);
                 break;
             }
+            i++;
         }
 
         puts("\nWould you buy it?\n");
