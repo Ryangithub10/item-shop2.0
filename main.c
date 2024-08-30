@@ -3,7 +3,7 @@
 
 typedef struct Player{
     int money;
-    struct Item items[10];
+    struct Item inventory[10];
 } Player;
 
 
@@ -55,6 +55,61 @@ void print_items(struct Item *items, size_t len) {
     puts("0. Back");
 }
 
+void show_desc(struct Item item) {
+    printf("Name: %s\n", item.name);
+
+    printf("Price: %d\n", item.price);
+}
+
+void show_items(struct Player *player, struct Item *items, size_t len) {
+    int input;
+    int con;
+    int i;
+
+    while (1) { 
+        puts("What do you want?\n");
+
+        print_items(items, len);
+
+        printf("=> ");
+        scanf("%d", &input);
+
+        if (input == 0)
+            break;
+        
+
+        do {
+            for (i = 0; i < len; i++) {
+                if (input - 1 == items[i].id) {
+                    show_desc(items[i]);
+                    break;
+                }
+            }
+
+            puts("\nWould you buy it?\n");
+            puts("1. Yes\t 0. No");
+            printf("=> ");
+            scanf("%d", &con);
+
+            if (con == 1) {
+                if (player->money < items[i].price)
+                    puts("sorry, but you don't have enough money.");
+                else {
+                    puts("Hehehe, thank you!");
+                    player->money -= items[i].price;
+                }
+                break;
+            }
+            else if (con == 0) {
+                break;
+            }
+            else {
+                puts("\n> Please insert valid input!\n");
+            }
+        } while (con != 1 || con != 0);
+    }
+}
+
 
 int main() {
     Player player = { 100000 };
@@ -82,6 +137,7 @@ int main() {
 
         switch (user_input) {
             case BUY:
+                show_items(&player, items, items_length);
                 getchar();
                 break;
             case SELL:
