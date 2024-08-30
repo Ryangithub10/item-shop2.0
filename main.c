@@ -1,5 +1,10 @@
 #include <stdio.h>
-#define uint unsigned int
+#include "lib/item.h"
+
+typedef struct Player{
+    int money;
+    struct Item items[10];
+} Player;
 
 
 enum input {
@@ -10,26 +15,22 @@ enum input {
 };
 char input_values[] = { BUY, SELL, TALK, QUIT };
 
-enum item_category { RESTORE_HP, RESTORE_SP, ARMOR, ACCESSORY, WEAPON };
 
-
-typedef struct Item {
-    enum item_category category;
-    char* name;
-    uint price;
-    union {
-        uint hp;
-        uint sp;
-        uint atk;
-        uint def;
-    };
-    char* desc;
-} Item;
-
-typedef struct Player{
-    int money;
-    struct Item items[10];
-} Player;
+struct Item items[] = {
+    {
+        .category = RESTORE_HP,
+        .name = "Mie Goreng",
+        .price = 3000,
+        .hp = 100,
+    },
+    {
+        .category = RESTORE_HP,
+        .name = "Coca Cola",
+        .price = 5000,
+        .hp = 150,
+    },
+};
+size_t items_length = sizeof(items) / sizeof(items[0]);
 
 
 int is_enum(char var, char enums[]) {
@@ -43,6 +44,15 @@ int is_enum(char var, char enums[]) {
     }
 
     return 0;
+}
+
+void print_items(struct Item *items, size_t len) {
+    for (size_t i = 0; i < len; i++) {
+        items[i].id = i;
+        printf("%ld. %s\t RP. %d\n", i+1, items[i].name, items[i].price);
+    }
+
+    puts("0. Back");
 }
 
 
@@ -72,8 +82,6 @@ int main() {
 
         switch (user_input) {
             case BUY:
-                puts("this is buy section");
-                getchar();
                 getchar();
                 break;
             case SELL:
