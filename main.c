@@ -6,36 +6,28 @@ struct Item items[] = {
         .type = RESTORE_HP,
         .name = "Mie Goreng",
         .price = 3000,
-        .stats = {
-            .hp = 100,
-        },
+        .stats = { .hp = 100 },
         .desc = "Just Mie Goreng",
     },
     {
         .type = RESTORE_HP,
         .name = "Coca Cola",
         .price = 5000,
-        .stats = {
-            .hp = 150,
-        },
+        .stats = { .hp = 150 },
         .desc = "Just Coca Cola",
     },
     {
         .type = ACCESSORY_DEF,
         .name = "Ring",
         .price = 100000,
-        .stats = {
-            .def = 300,
-        },
+        .stats = { .def = 300 },
         .desc = "Just Ring",
     },
     {
         .type = ACCESSORY_MAX_SP,
         .name = "Capsule Pouch",
         .price = 100000,
-        .stats = {
-            .sp = 100,
-        },
+        .stats = { .sp = 100 },
         .desc = "Increse capacity of SP",
     }
 };

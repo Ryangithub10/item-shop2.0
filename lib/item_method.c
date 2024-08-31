@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "item.h"
+#include "item_method.h"
 
 void print_items(struct Item *items, size_t len) {
     for (size_t i = 0; i < len; i++) {
@@ -82,8 +82,9 @@ void show_items(struct Player *player, struct Item *items, size_t len) {
                 if (player->money < items[i].price)
                     puts("sorry, but you don't have enough money.");
                 else {
-                    puts("Hehehe, thank you!");
+                    push_item(items[i], player);
                     player->money -= items[i].price;
+                    puts("Hehehe, thank you!");
                 }
                 break;
             }
