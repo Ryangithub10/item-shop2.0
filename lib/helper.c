@@ -1,23 +1,13 @@
+#include <stddef.h>
 #include "helper.h"
 
-int is_char_enum(char var, char enums[]) {
-    int i = 0;
+int is_enum(char var, char enums[]) {
+    size_t i = 0;
 
-    while (enums[i]) {
-        if (enums[i] == var)
+    while (enums[i] != '\0') {
+        if (var == enums[i])
             return 1;
-        i++;
-    }
 
-    return 0;
-}
-
-int is_enum(int var, int enums[]) {
-    int i = 0;
-
-    while (enums[i]) {
-        if (enums[i] == var)
-            return 1;
         i++;
     }
 
