@@ -1,8 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "item.h"
-
 #define MAX 20
 
 struct Player {

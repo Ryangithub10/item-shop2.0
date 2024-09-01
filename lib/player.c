@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "item.h"
 #include "player.h"
 
 int top = -1;
